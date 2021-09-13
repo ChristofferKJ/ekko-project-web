@@ -18,20 +18,13 @@ $mysqli = new mysqli(
 );
 
 $insert = add_mail_and_wallet($_POST['email'], $_POST['wallet'], $mysqli);
+echo json_encode($insert); 
 
-if ($insert) 
-{
-    $json_res = ["msg" => "success"];
-    echo json_encode($json_res); 
-} else {
-    $json_res = ["msg" => "fail (email already used)"];
-    echo json_encode($json_res); 
-}
 
 function add_mail_and_wallet($email, $wallet, mysqli $mysqli)
 {
     if(empty($email) || empty($wallet))               return ["fail" => "email or wallet is empty"];
-    if(strlen($email) > 300 || strlen($wallet) > 300) return ["fail" => "email or wallet is wronly formatted"];
+    if(strlen($email) > 300 || strlen($wallet) > 300) return ["fail" => "email or wallet is wrongly formatted"];
 
 
     $email = $mysqli->real_escape_string($email);
@@ -53,8 +46,8 @@ function add_mail_and_wallet($email, $wallet, mysqli $mysqli)
     $stmt = $mysqli->prepare("INSERT INTO emails (email, wallet) VALUES(?, ?)");
     $stmt->bind_param('ss', $email, $wallet);
 
-    if($stmt->Execute())    ["success" => ""];
-    else                    ["fail" => "something went wrong"];
+    if($stmt->Execute())    return ["success" => ""];
+    else                    return ["fail" => "something went wrong"];
 }
 
 function send_confirmation_mail()
