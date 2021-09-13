@@ -1,0 +1,325 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: auto;
+    background-color: black;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 200px;
+}
+
+.container-left {
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes container-left {
+    0%{
+        opacity: 0;
+        transform:translateY(30px)
+    }
+    100%{
+        opacity: 100;
+    }
+}
+
+@keyframes logo {
+    0%{
+        opacity: 0;
+        transform:translateY(-10px)
+    }
+    100%{
+        opacity: 100;
+    }
+}
+
+@keyframes signup {
+    0%{
+        opacity: 0;
+        transform: translateY(-30px)
+    }
+    100%{
+        opacity: 100;
+    }
+}
+
+@keyframes socialsdiscord {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 100;
+    }
+}
+
+.container-right {
+    align-items: center;
+    justify-content: center;
+}
+
+.whitelist-header img{
+    height: 100px;
+    margin: 20px;
+    animation: logo 1s ease-in;
+
+}
+
+.whitelist-header {
+    color: white;
+    text-align: center;
+    line-height: 40pt;
+}
+
+.whitelist-header h1 {
+    font-size: 55px;
+    letter-spacing: -1px;
+    font-weight: bold;
+    animation: container-left 1s ease-in;
+}
+
+.whitelist-header h2 {
+    font-size: 30px;
+    letter-spacing: -1px;
+    font-weight: 300;
+    animation: container-left 1s ease-in;
+}
+
+.signupform {
+    width: 400px;
+    height: 600px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    padding: 50px 30px;
+    animation: logo 1s ease-in;
+}
+
+input{
+    margin-bottom: 5px;
+}
+
+.signupform hr {
+    width: 70px;
+    height: 2px;
+    margin: 30px auto;
+    border: 0;
+    background: black;
+}
+
+.signupform p {
+    color: black;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.signupform h3 {
+    color: black;
+    font-size: 40px;
+    letter-spacing: -1px;
+}
+
+.signupform input {
+    border-radius: 3px;
+    background-color: black;
+    width: 100%;
+    height: 50px;
+    border: 0px;
+    padding: 0 20px;
+    color: white;
+}
+
+.signupform button {
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 40px;
+    background: transparent;
+    color: black;
+    padding: 10px 30px;
+    margin: 18px;
+    cursor: pointer;
+}
+
+.signupform button:hover {
+    color: white;
+    background: black;
+    transition: .6s;
+}
+
+::placeholder {
+    color: rgb(189, 189, 189);
+}
+
+.footer {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding-top: 30px;
+    animation: socialsdiscord 1s ease-in;
+}
+
+.footer-socials {
+    display: flex;
+    padding-top: 15px;
+    font-size: 18px;
+    gap: 16px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-socials div:hover {
+    opacity: .6;
+    transition: 300ms;
+}
+
+.footer-socials i {
+    color: white;
+}
+
+.footer-text a:link {
+    color: white;
+}
+
+.footer-text a:visited {
+    color: white;
+}
+
+.footer-text a:active {
+    color: white;
+}
+
+#downarrowmobile{
+    display: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+        display: flex;
+        height: 100vh;
+        width: auto;
+        background-color: black;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        padding: 200px;
+    }
+
+    .whitelist-header h1 {
+        font-size: 45px;
+        letter-spacing: -1px;
+        font-weight: bold;
+    }
+
+    .whitelist-header h2 {
+        font-size: 25px;
+        letter-spacing: -1px;
+        line-height: 25pt;
+        font-weight: 300;
+    }
+
+    .container-left{
+        margin: 50px;
+        padding-bottom: 0;
+    }
+    
+}
+
+@media screen and (max-width: 769px) {
+    .container {
+        display: flex;
+        height: 200vh;
+        width: auto;
+        background-color: black;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .whitelist-header h1 {
+        font-size: 45px;
+        letter-spacing: -1px;
+        font-weight: bold;
+    }
+
+    .whitelist-header h2 {
+        font-size: 25px;
+        letter-spacing: -1px;
+        line-height: 25pt;
+        font-weight: 300;
+    }
+
+    .container-left {
+        margin: 50px;
+        padding-bottom: 0;
+    }
+
+    #downarrowmobile{
+        color: white;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        padding-top: 100px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .container {
+        display: flex;
+        height: 200vh;
+        width: auto;
+        background-color: black;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .whitelist-header h1 {
+        font-size: 45px;
+        letter-spacing: -1px;
+        font-weight: bold;
+    }
+
+    .whitelist-header h2 {
+        font-size: 25px;
+        letter-spacing: -1px;
+        line-height: 25pt;
+        font-weight: 300;
+    }
+
+    .container-left {
+        margin: 50px;
+        padding-bottom: 0;
+    }
+
+    #downarrowmobile{
+        color: white;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        padding-top: 100px;
+    }
+}
+
+
+
+
+
+
+
+
+
