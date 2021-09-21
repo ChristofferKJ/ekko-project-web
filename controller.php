@@ -9,23 +9,22 @@ require_once 'db.php';
 
 $json   = file_get_contents(dirname(__FILE__) . "/config.json");
 $config = json_decode($json);
-    
+
 $mysqli = new mysqli(
-    $config->db_host, 
-    $config->db_user, 
-    $config->db_pass, 
+    $config->db_host,
+    $config->db_user,
+    $config->db_pass,
     $config->db_name
 );
 
 $insert = add_mail_and_wallet($_POST['email'], $_POST['wallet'], $mysqli);
-echo json_encode($insert); 
+echo json_encode($insert);
 
 
 function add_mail_and_wallet($email, $wallet, mysqli $mysqli)
 {
-    if(empty($email) || empty($wallet))               return ["fail" => "email or wallet is empty"];
-    if(strlen($email) > 300 || strlen($wallet) > 300) return ["fail" => "email or wallet is wrongly formatted"];
-
+    if (empty($email) || empty($wallet))               return ["fail" => "email or wallet is empty"];
+    if (strlen($email) > 300 || strlen($wallet) > 300) return ["fail" => "email or wallet is wrongly formatted"];
 
     $email = $mysqli->real_escape_string($email);
     $wallet = $mysqli->real_escape_string($wallet);
@@ -34,25 +33,28 @@ function add_mail_and_wallet($email, $wallet, mysqli $mysqli)
     $stmt = $mysqli->prepare("SELECT email FROM emails WHERE email = ?");
     $stmt->bind_param('s', $email);
     $res = $stmt->Execute();
-    
-    if($res) 
-    {
-        $result = $stmt->get_result(); 
+
+    if ($res) {
+        $result = $stmt->get_result();
         $items = $result->fetch_assoc();
-        if(!empty($items)) return ["fail" => "email already signed up"];
+        if (!empty($items)) return ["fail" => "email already signed up"];
     }
 
-    // insert into database
-    $stmt = $mysqli->prepare("INSERT INTO emails (email, wallet) VALUES(?, ?)");
-    $stmt->bind_param('ss', $email, $wallet);
+    // get client ip
+    if     (!empty($_SERVER['HTTP_CLIENT_IP']))         $ip = $_SERVER['HTTP_CLIENT_IP'];
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else                                                $ip = $_SERVER['REMOTE_ADDR'];
 
-    if($stmt->Execute())    return ["success" => ""];
+    // insert into database
+    $stmt = $mysqli->prepare("INSERT INTO emails (email, wallet, ip) VALUES(?, ?, ?)");
+    $stmt->bind_param('ssi', $email, $wallet, $ip);
+
+    if ($stmt->Execute())    return ["success" => ""];
     else                    return ["fail" => "something went wrong"];
 }
 
 function send_confirmation_mail()
 {
-
 }
 
 
