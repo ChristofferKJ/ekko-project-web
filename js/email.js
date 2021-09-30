@@ -12,6 +12,7 @@ $(document).on('submit', 'form', function (e) {
             wallet: $('#wallet').val()
         },
         success: function (res) {
+            console.log(res);
             errors.empty();
             try {
                 obj = JSON.parse(res);

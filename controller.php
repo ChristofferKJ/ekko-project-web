@@ -41,13 +41,12 @@ function add_mail_and_wallet($email, $wallet, mysqli $mysqli)
     }
 
     // get client ip
-    if     (!empty($_SERVER['HTTP_CLIENT_IP']))         $ip = $_SERVER['HTTP_CLIENT_IP'];
-    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    else                                                $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    $ip = $mysqli->real_escape_string($ip);    
 
     // insert into database
     $stmt = $mysqli->prepare("INSERT INTO emails (email, wallet, ip) VALUES(?, ?, ?)");
-    $stmt->bind_param('ssi', $email, $wallet, $ip);
+    $stmt->bind_param('sss', $email, $wallet, $ip);
 
     if ($stmt->Execute())    return ["success" => ""];
     else                    return ["fail" => "something went wrong"];
